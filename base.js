@@ -695,7 +695,7 @@ function update() {
 	
 	if(redditspecialstep==0) {
 		rsth="first";
-		rsclue="<li>Open this <a href='http://www.reddit.com/r/chickens_incremental' target='_blank'>game's subreddit</a>, but you must <b>no</b>t <b>participate</b></li><li>Slay some chickens</li><li>???</li><li>PROFIT (well, ignore the 3rd and the 4th instruction)</li>";
+		rsclue="<li>Open this <a href='http://www.reddit.com/r/chickens_incremental' target='_blank'>game's subreddit</a>, but you must <b title='np.reddit.com'>no</b>t <b title='np.reddit.com'>participate</b></li><li>Slay some chickens</li><li>???</li><li>PROFIT (well, ignore the 3rd and the 4th instruction)</li><li>Hover the bolded words for more clue</li>";
 	}
 	else if(redditspecialstep==1) {
 		rsth="second";
