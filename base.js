@@ -1828,6 +1828,8 @@ function enterportal() {
 						playerhpmax+=100;
 					}
 					
+					$(".notifications").html("Never hesitate to explore, just explore as far as you can! Something is waiting you at the end...");
+					
 					update_battle();
 					$("#player-stats").show();
 					$("#before-adventure, #tab, #inventory").hide();
