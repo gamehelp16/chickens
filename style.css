@@ -597,6 +597,13 @@ pre {
 #skills ul li:before {
 	content:"- ";
 }
+#visualizationarea {
+	border:1px solid black;
+	padding:10px;
+	display:inline-block;
+	background:white;
+	margin-left:26px;
+}
 #furnace input, #adv-buttons input, #game-saves input, #robots input, #before-adventure input, .trade-tpdevice input, #craft-chickenators input, #respawnarea input {
 	display:inline-block;
 }
@@ -650,7 +657,7 @@ pre {
 }
 #player-stats {
 	position:fixed;
-	top:10px;
+	top:0;
 	right:25px;
 	width:250px;
 	padding:10px;
