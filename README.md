@@ -1,5 +1,4 @@
 Chickens!
 ========
 
-This game is a still beta game made by me (when i'm typing this)<br>
-<a href="https://dl.dropboxusercontent.com/u/120818218/chickens/index.html">Game link</a> and don't forget to check <a href="http://reddit.com/r/incremental_games">/r/incremental_games</a> (I might post updates for this game here)
+<a href="http://gamehelp16.github.io">Play it now!</a> or <a href="https://dl.dropboxusercontent.com/u/120818218/chickens/index.html">click here</a> if you have played the game using the old URL and wanted to import your progress to the new URL<br><br>Game files can be found in <code>gh-pages</code> branch
