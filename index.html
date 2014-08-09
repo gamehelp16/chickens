@@ -305,6 +305,7 @@
 			<input type="button" value="Trade wheat with 1 gold chicken nugget" onclick="trade('wheat')" class="trade-wheat" style="display:none;">
 			<input type="button" value="Trade medicine with 30 wheat" onclick="trade('medicine')" class="trade-medicine" style="display:none;">
 			<div class="trade-tpdevice" style="display:none;"><input type="button" value="Trade a teleportation device for 2 diamond chicken meats (5 left)" onclick="trade('tpdevice')">&nbsp;&nbsp;&nbsp;(<a href="#" onclick="alert('Buy this awesome stuff and you can place it whereever you want in the chickenverse, once you place this amazing stuff, you will be able to teleport to where you put this awesome stuff!\n\nIf you place this awesome stuff and it turns out that you have placed one before, that device will break automatically and when you teleport, you will be teleported to the where you place the new one\n\nPS: You can\'t pick up this awesome stuff after placing it\nPPS: You need teleportation skill to use this awesome thing\nPPPS: The trader has limited stock of this thing, so use it wisely :)')">What in the world is this and how it works</a>)</div>
+			<input type="button" value="Trade compass with 100 emerald chicken nuggets" onclick="trade('compass')" class="trade-compass" style="display:none;">
 			<div id="dicegame" style="display:none;">
 				<br>
 				The trader wants to play a "dice game" with you (<a href="#" onclick="alert('Decide what and how many you will give the trader and the trader will roll a dice\nIf the dice lands on number 1 or 6, you will get 3 times as many as what you give the trader. Otherwise, you won\'t get anything\n\nBut, if the dice always lands on number 4, it means that the programmer is a unfair :(');">More info about this game</a>)<br>
@@ -343,7 +344,7 @@
    |__    ___   __    ___  ______    _____        ___     |
  =(________________________________________________________)=
 </pre><br>
-Raw cipher text: <input type="text" value="UaIYeebcaZIeebbIaJcacbZZcdLebZedbcccaIbaaaMITcIebIbIZbIbaZIZbdcIaZKWaedIdddIeIacZeeIbaaaddcZIbIMZZceaIaNbcbbIaeKccZcabIcIdedLYdaabaedcbaZdaccIacZYcaZaIcYcdaceeIbaaaLCccbGrXoHl3gGlC4GgGrXoXjH5GyCnGn2yGzXy3gG6Sti4Gg2t2pnpnpCmXgXgXzGpioXpnt3gmxWgksWvX6X3S6iwioSvnhGzShXwHsXvHsXgSxGz2yygn4HsXgXgmlHjHsSyXpSgHg3gGpmsG53g2xHjGyG2HsS034XgHgGpGsWvX6X3Sly53lCgn4G2XrDyzg2t2piyWrX3GyC1jgXzinGn2yH52pHgHpG034Xt3gG6WpGzi4GzmgGpmpCmymmy2yy4H3StGxyti4GgWl3g2xSlX5nsHsS034XgWwCmSinr2oilmgWwCmmyyj3gHgGpEsWvX6X3SyjKkz2gHny=lJdcxBklJZFVB1lhdg1BBkx9pdBgIJxBFdIVgddJZB4ABNNBBhJhgd51wlhgclBhBF4MMxk5g1BllhBZAMxddJZBBlwlZJEQx9BthVAcZB1lJtchlZhIldFdF8xkBB11BNBlBBkJgVBNghBZA1BAllBg1B1BkMxddJZAAtglE"><br><br>
+Raw cipher text: <input type="text" value="UaIYeebcaZIeebbIaJcacbZZcdLebZedbcccaIbaaaMITcIebIbIZbIbaZIZbdcIaZKWaedIdddIeIacZeeIbaaaddcZIbIMZZceaIaNbcbbIaeKccZcabIcIdedLYdaabaedcbaZdaccIacZYcaZaIcYcdaceeIbaaaLCccbGrXoHl3gGlC4GgGrXoXjH5GyCnGn2yGzXy3gG6Sti4Gg2t2pnpnpCmXgXgXzGpioXpnt3gmxWgksWvX6X3S6iwioSvnhGzShXwHsXvHsXgSxGz2yygn4HsXgXgmlHjHsSyXpSgHg3gGpmsG53g2xHjGyG2HsS034XgHgGpGsWvX6X3Sly53lCgn4G2XrDyzg2t2piyWrX3GyC1jgXzinGn2yH52pHgHpG034Xt3gG6WpGzi4GzmgGpmpCmymmy2yy4H3StGxyti4GgWl3g2xSlX5nsHsS034XgWwCmSinr2oilmgWwCmmyyj3gHgGpEsWvX6X3SyjKkz2gHny=lJdcxBklJZFVB1lhdg1BBkx9pdBgIJxBFdIVgddJZB4ABNNBBhJhgd51wlhgclBhBF4MMxk5g1BllhBZAMxddJZBBlwlZJEQx9BthVAcZB1lJtchlZhIldFdF8xkBB11BNBlBBkJgVBNghBZA1BAllBg1B1BkMxddJZAAtglE" readonly="readonly" size="50"><br><br>
 				Luckily the trader has a friend that is very clever in deciphering codes, he is willing to help you,<br>but you should give him an emerald chicken nugget as a thanks<br><br>
 				<input type="button" value="Ask trader's friend for help and give him an emerald chicken nugget" onclick="cipherclue()" class="cipher-clue-button">
 				<br>
@@ -403,7 +404,6 @@ Raw cipher text: <input type="text" value="UaIYeebcaZIeebbIaJcacbZZcdLebZedbccca
 				<span id="availablecommands">Available commands: go, pos, clear, examine, exit</span><br>
 				You can go to: <span id="cangoto">north (&uarr;)</span><br><br>
 				<div id="enemycardarea"></div>
-				<pre id="visualizationarea"></pre>
 			</div>
 		</div>
 		<div id="bossbattleftw" class="hidden">
@@ -457,17 +457,19 @@ Well, the nuggets are magically taken<br>from your "real world" inventory.<br>So
 				Boots: <span id="player-boots"></span><br><br>
 				<input type="button" value="Heal (1 iron chicken nugget)" id="heal-battle" onclick="heal()">
 			</div>
-			<br><br>
+			<br>
 			<fieldset>
 				<legend>What you bring</legend>
 					<table id="mini-invt">
 					</table>
 			</fieldset>
+			<br>
+			<pre id="visualizationarea" style="display:none;"></pre>
 		</div><br>
 	</div>
 	
 	<div id="tab4" class="hidden">
-		Chickens! v1.1<br>
+		Chickens! v1.2<br>
 		Also check out <a href="http://gamehelp16.github.io/thegoldfactory" target="_blank">my first incremental game!</a><br><br>
 		<div id="game-saves">
 			<input type="button" value="Save game" onclick="save('local')">
