@@ -35,6 +35,7 @@ $(document).ready(function() {
 	items.push({"name":"medicine", "owned":0, "showinvt":false}); //25
 	items.push({"name":"teleportation device", "owned":0, "showinvt":false}); //26
 	items.push({"name":"furnace4", "owned":0, "showinvt":false}); //27
+	items.push({"name":"compass", "owned":0, "showinvt":false}); //28
 	
 	skills=[];
 	skills.push({"name":"Speed", "owned":false, "desc":"Killing chickens is two seconds faster now"}); //0
@@ -98,6 +99,7 @@ $(document).ready(function() {
 	endgame=false;
 	rubymeats=1000000000;
 	rubynuggets=0;
+	bossinterval="";
 	
 	autosaveinterval=setInterval(function() {
 		autosavetime--;
@@ -670,9 +672,8 @@ function update() {
 		if(tool<=10)$("#craft-chickenators").show();
 		if(items[27].owned==0)$(".trade-furnace4").show();
 		$("#mutant-chicken").show();
-		if(tool<6) {
-			$(".craft-chickenator-onethousand").show();
-		}
+		$(".trade-compass").show();
+		if(tool<6)$(".craft-chickenator-onethousand").show();
 	}
 	
 	if(tool>0) {$(".craft-chicken-sword").hide();}
@@ -716,6 +717,11 @@ function update() {
 	
 	$(".rsth").html(rsth);
 	$(".rsclue").html(rsclue);
+	
+	if(items[28].owned>=1) {
+		$(".trade-compass").hide();
+		$("#availablecommands").html("Available commands: go, pos, clear, examine, map, exit");
+	}
 	
 }
 
@@ -1105,6 +1111,13 @@ function trade(what) {
 			items[26].owned+=1;
 			tpdevicestock--;
 			$(".notifications").html("Yay! This awesome stuff is really awesome! :D");
+		}
+	}
+	else if(what=="compass") {
+		if(items[14].owned>=100) {
+			items[14].owned-=100;
+			items[28].owned+=1;
+			$(".notifications").html("You unlocked a new command in chickenverse 2.0!");
 		}
 	}
 	update();
@@ -1828,8 +1841,6 @@ function enterportal() {
 						playerhpmax+=100;
 					}
 					
-					$(".notifications").html("Never hesitate to explore, just explore as far as you can! Something is waiting you at the end...");
-					
 					update_battle();
 					$("#player-stats").show();
 					$("#before-adventure, #tab, #inventory").hide();
@@ -1915,6 +1926,7 @@ function enterportal() {
 						}
 					}
 					else {
+						$(".notifications").html("Never hesitate to explore, just explore as far as you can! Something is waiting you at the end...");
 						$("#adventure").show();
 					}
 					
@@ -2424,18 +2436,18 @@ function executecmd(cmd) {
 							cavepos[1]++;
 							battleinvt[0].owned-=1;
 							output='You go to the north';
+							playerlocation="cave"+cavepos[0]+"x"+cavepos[1];
+							if(Math.random()<0.3) {
+								spawnenemy();
+								spawnnewenemy=true;
+							}
+							else {
+								enemies=[];
+								drops=[];
+							}
 						}
 						else {
 							output=bangwall("north");
-						}
-						playerlocation="cave"+cavepos[0]+"x"+cavepos[1];
-						if(Math.random()<0.3) {
-							spawnenemy();
-							spawnnewenemy=true;
-						}
-						else {
-							enemies=[];
-							drops=[];
 						}
 					}
 				}
@@ -2464,18 +2476,18 @@ function executecmd(cmd) {
 							cavepos[0]++;
 							battleinvt[0].owned-=1;
 							output='You go to the east';
+							playerlocation="cave"+cavepos[0]+"x"+cavepos[1];
+							if(Math.random()<0.3) {
+								spawnenemy();
+								spawnnewenemy=true;
+							}
+							else {
+								enemies=[];
+								drops=[];
+							}
 						}
 						else {
 							output=bangwall("east");
-						}
-						playerlocation="cave"+cavepos[0]+"x"+cavepos[1];
-						if(Math.random()<0.3) {
-							spawnenemy();
-							spawnnewenemy=true;
-						}
-						else {
-							enemies=[];
-							drops=[];
 						}
 					}
 				}
@@ -2490,18 +2502,18 @@ function executecmd(cmd) {
 							cavepos[0]--;
 							battleinvt[0].owned-=1;
 							output='You go to the west';
+							playerlocation="cave"+cavepos[0]+"x"+cavepos[1];
+							if(Math.random()<0.3) {
+								spawnenemy();
+								spawnnewenemy=true;
+							}
+							else {
+								enemies=[];
+								drops=[];
+							}
 						}
 						else {
 							output=bangwall("west");
-						}
-						playerlocation="cave"+cavepos[0]+"x"+cavepos[1];
-						if(Math.random()<0.3) {
-							spawnenemy();
-							spawnnewenemy=true;
-						}
-						else {
-							enemies=[];
-							drops=[];
 						}
 					}
 				}
@@ -2516,18 +2528,18 @@ function executecmd(cmd) {
 							cavepos[1]--;
 							battleinvt[0].owned-=1;
 							output='You go to the south';
+							playerlocation="cave"+cavepos[0]+"x"+cavepos[1];
+							if(Math.random()<0.3) {
+								spawnenemy();
+								spawnnewenemy=true;
+							}
+							else {
+								enemies=[];
+								drops=[];
+							}
 						}
 						else {
 							output=bangwall("south");
-						}
-						playerlocation="cave"+cavepos[0]+"x"+cavepos[1];
-						if(Math.random()<0.3) {
-							spawnenemy();
-							spawnnewenemy=true;
-						}
-						else {
-							enemies=[];
-							drops=[];
 						}
 					}
 				}
@@ -2550,6 +2562,8 @@ function executecmd(cmd) {
 			}
 		}
 		
+		updateminimap();
+		
 	}
 	else if(cmd[0]=="tp") { //for testing purposes only, maybe :p
 		playerlocation="cave"+cmd[1]+"x"+cmd[2];
@@ -2569,7 +2583,7 @@ function executecmd(cmd) {
 		output="Log cleared";
 	}
 	else if(cmd[0]=="visual") {
-		$("#visualizationarea").html("");
+		$("#visualizationarea").show().html("");
 		for(they=1020;they>=980;they--) {
 			for(thex=980;thex<=1020;thex++) {
 				if(roomexist(thex,they)) {
@@ -2584,6 +2598,21 @@ function executecmd(cmd) {
 			$("#visualizationarea").html($("#visualizationarea").html()+"<br>");
 		}
 		output="Visualization visualized";
+	}
+	else if(cmd[0]=="map") {
+		if(items[28].owned>=1) {
+			if(playerlocation=="outside2" || playerlocation=="outside1" ||  playerlocation=="outside") {
+				output='You must be inside the cave to use this command';
+			}
+			else {
+				$("#visualizationarea").show().html("");
+				updateminimap();
+				output="The map has been shown";
+			}
+		}
+		else {
+			output="Oops, you haven't unlocked this command yet";
+		}
 	}
 	else if(cmd[0]=="examine") {
 		if(cmd[1]=="room") {
@@ -2663,6 +2692,24 @@ function executecmd(cmd) {
 	
 	addtolog(output);
 	update_battle();
+}
+
+function updateminimap() {
+	$("#visualizationarea").html("");
+	cavepos=playerlocation.replace("cave","").split("x");
+	for(they=parseInt(cavepos[1])+5;they>=parseInt(cavepos[1])-5;they--) {
+		for(thex=parseInt(cavepos[0])-5;thex<=parseInt(cavepos[0])+5;thex++) {
+			if(roomexist(thex,they)) {
+				thechar="&bull;&nbsp;";
+				if(thex==cavepos[0] && they==cavepos[1])thechar="<b>Y</b>&nbsp;";
+				$("#visualizationarea").html($("#visualizationarea").html()+thechar);
+			}
+			else {
+				$("#visualizationarea").html($("#visualizationarea").html()+"&nbsp;&nbsp;");
+			}
+		}
+		$("#visualizationarea").html($("#visualizationarea").html()+"<br>");
+	}
 }
 
 function addtolog(text) {
@@ -2864,8 +2911,8 @@ function bossbattle() {
 	endgame=false;
 	chickenstun=0;
 	
-	setInterval(function() {
-		if(bosshealth>0 && !endgame) {
+	bossinterval=setInterval(function() {
+		if(bosshealth>0 && !endgame && bossbattleiscommencing) {
 			if(chickenstun>0) {
 				chickenstun--;
 			}
@@ -2880,6 +2927,9 @@ function bossbattle() {
 				}
 			}
 			updateboss();
+		}
+		else {
+			if(typeof bossinterval !== "undefined")clearInterval(bossinterval);
 		}
 	},5000);
 	
@@ -2902,14 +2952,16 @@ function attackboss() {
 	if(bosshealth<=0) {
 		bosshealth=0;
 		endgame=true; // ULTIMATE WINNING!!!
+		bossbattleiscommencing=false;
+		if(typeof bossinterval !== "undefined")clearInterval(bossinterval);
 		thefinal();
 	}
 	updateboss();
 }
 
 function throwdiamondnugget() {
-	if(items[3].owned>0) {
-		items[3].owned--;
+	if(items[13].owned>0) {
+		items[13].owned--;
 		cd(getRandomInt(7,12),"throw-diamond-nugget","Throw a diamond chicken nugget");
 		if(Math.random()<0.1) {
 			if(Math.random()<0.5) {
@@ -2931,6 +2983,7 @@ function throwdiamondnugget() {
 
 function runaway() {
 	bossbattleiscommencing=false;
+	if(typeof bossinterval !== "undefined")clearInterval(bossinterval);
 	exitportal();
 	$(".notifications").html("You finally choose to run away, maybe next time");
 }
@@ -2995,7 +3048,7 @@ function save(what,param2) {
 		}
 	}
 	else if(what=="string") {
-		return btoa(items[0].owned+"|"+items[1].owned+"|"+items[2].owned+"|"+items[3].owned+"|"+items[4].owned+"|"+items[5].owned+"|"+items[6].owned+"|"+items[7].owned+"|"+items[8].owned+"|"+items[9].owned+"|"+items[10].owned+"|"+items[11].owned+"|"+items[12].owned+"|"+items[13].owned+"|"+items[14].owned+"|"+items[15].owned+"|"+items[16].owned+"|"+items[17].owned+"|"+items[18].owned+"|"+items[19].owned+"|"+items[20].owned+"|"+items[21].owned+"|"+items[22].owned+"|"+items[23].owned+"|"+items[24].owned+"|"+items[25].owned+"|"+skills[0].owned+"|"+skills[1].owned+"|"+skills[2].owned+"|"+skills[3].owned+"|"+skills[3].level+"|"+skills[4].owned+"|"+skills[5].owned+"|"+skills[6].owned+"|"+skills[7].owned+"|"+chickenspop+"|"+ironchickenspop+"|"+goldchickenspop+"|"+invtnotif+"|"+tradernotif+"|"+beginning+"|"+unlockedskills+"|"+trademap+"|"+tradebetterfurnace+"|"+introducetp+"|"+playerhp+"|"+playerhpmax+"|"+usesound+"|"+tool+"|"+helmet+"|"+chestplate+"|"+leggings+"|"+boots+"|"+breedinterval+"|"+items[26].owned+"|"+tpdevicekm+"|"+tpdevicestock+"|"+rubysearchstep+"|"+getscroll+"|"+items[27].owned+"|"+redditspecialstep);
+		return btoa(items[0].owned+"|"+items[1].owned+"|"+items[2].owned+"|"+items[3].owned+"|"+items[4].owned+"|"+items[5].owned+"|"+items[6].owned+"|"+items[7].owned+"|"+items[8].owned+"|"+items[9].owned+"|"+items[10].owned+"|"+items[11].owned+"|"+items[12].owned+"|"+items[13].owned+"|"+items[14].owned+"|"+items[15].owned+"|"+items[16].owned+"|"+items[17].owned+"|"+items[18].owned+"|"+items[19].owned+"|"+items[20].owned+"|"+items[21].owned+"|"+items[22].owned+"|"+items[23].owned+"|"+items[24].owned+"|"+items[25].owned+"|"+skills[0].owned+"|"+skills[1].owned+"|"+skills[2].owned+"|"+skills[3].owned+"|"+skills[3].level+"|"+skills[4].owned+"|"+skills[5].owned+"|"+skills[6].owned+"|"+skills[7].owned+"|"+chickenspop+"|"+ironchickenspop+"|"+goldchickenspop+"|"+invtnotif+"|"+tradernotif+"|"+beginning+"|"+unlockedskills+"|"+trademap+"|"+tradebetterfurnace+"|"+introducetp+"|"+playerhp+"|"+playerhpmax+"|"+usesound+"|"+tool+"|"+helmet+"|"+chestplate+"|"+leggings+"|"+boots+"|"+breedinterval+"|"+items[26].owned+"|"+tpdevicekm+"|"+tpdevicestock+"|"+rubysearchstep+"|"+getscroll+"|"+items[27].owned+"|"+redditspecialstep+"|"+items[28].owned);
 	}
 	else if(what=="splitter") {
 	
@@ -3070,6 +3123,7 @@ function save(what,param2) {
 		if(tehcodez.length>=59) {getscroll = (tehcodez[58] === "true");} else {getscroll = false;}
 		if(tehcodez.length>=60) {items[27].owned = parseFloat(tehcodez[59]);}else {items[27].owned = 0;}
 		if(tehcodez.length>=61) {redditspecialstep = parseFloat(tehcodez[60]);}else {redditspecialstep = 0;}
+		if(tehcodez.length>=62) {items[28].owned = parseFloat(tehcodez[61]);}else {items[28].owned = 0;}
 		
 		if(breedinterval<1500) {
 			breedinterval+=1000;
