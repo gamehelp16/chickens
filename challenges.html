@@ -58,13 +58,15 @@
 		else if(datas[60]==2) {
 			if(pw=="3142222413") {
 				datas[60]++;
-				datas[0]++;
+				a=parseInt(datas[0]);
+				a+=31422;
+				datas[0]=a;
 				joindata();
 				alert("True! You got 31422 chicken meats!\nNow you will be redirected to the main game page");
 				window.location="index.html?redditspecial=true";
 			}
 			else {
-				alert("Wrong password!");
+				alert("Wronag password!");
 			}
 		}
 		else if(datas[60]==3) {
