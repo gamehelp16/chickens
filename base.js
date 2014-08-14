@@ -1628,7 +1628,7 @@ function update_battle() {
 		playerweapon="Chickenator 9999";
 	}
 	
-	if((battleinvt[2].owned>0 && kmexplored!=0) && skills[6].owned) {
+	if(battleinvt[2].owned>0 && kmexplored!=0) {
 		$("#use-tpdevice").css("display","inline-block");
 		if(tpdevicekm!=kmexplored) {
 			$("#use-tpdevice input").removeAttr("disabled");
@@ -2391,12 +2391,17 @@ function cdi(countdown,id) {
 	}
 }
 function placetpdevice() {
-	if(battleinvt[2].owned>=1) {
-		tpdevicekm=kmexplored;
-		console.log(tpdevicekm+"A");
-		battleinvt[2].owned--;
-		$(".notifications").html("The teleportation device has been placed");
-		update_battle();
+	if(skills[6].owned) {
+		if(battleinvt[2].owned>=1) {
+			tpdevicekm=kmexplored;
+			console.log(tpdevicekm+"A");
+			battleinvt[2].owned--;
+			$(".notifications").html("The teleportation device has been placed");
+			update_battle();
+		}
+	}
+	else {
+		alert('Oops! It seems that you don\'t have knowledge to use this thing, try learning the \'teleportation\' skill');
 	}
 }
 function tptotpdevice() {
