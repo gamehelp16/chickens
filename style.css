@@ -725,30 +725,38 @@ body.wob input[type=text], body.wob select {
 	width:100%;
 }
 
-tr.iron-stuff {
+tr.iron-stuff, #furnace-iron-chicken-meat input {
 	color:grey;
+	border-color:grey;
 }
-tr.gold-stuff {
+tr.gold-stuff, #furnace-gold-chicken-meat input {
 	color:#C1A900;
+	border-color:#C1A900;
 }
-tr.diamond-stuff {
+tr.diamond-stuff, #furnace-diamond-chicken-meat input {
 	color:#007EFF;
+	border-color:#007EFF;
 }
-tr.emerald-stuff {
+tr.emerald-stuff, #furnace-emerald-chicken-meat input {
 	color:#60C700;
+	border-color:#60C700;
 }
 
-body.wob tr.iron-stuff {
+body.wob tr.iron-stuff, body.wob #furnace-iron-chicken-meat input {
 	color:#A0A0A0;
+	border-color:#A0A0A0;
 }
-body.wob tr.gold-stuff {
+body.wob tr.gold-stuff, body.wob #furnace-gold-chicken-meat input {
 	color:#E1C920;
+	border-color:#E1C920;
 }
-body.wob tr.diamond-stuff {
+body.wob tr.diamond-stuff, body.wob #furnace-diamond-chicken-meat input {
 	color:#209EFF;
+	border-color:#209EFF;
 }
-body.wob tr.emerald-stuff {
+body.wob tr.emerald-stuff, body.wob #furnace-emerald-chicken-meat input {
 	color:#80E720;
+	border-color:#80E720;
 }
 
 body.wob .enemy-card.angry {
@@ -756,6 +764,11 @@ body.wob .enemy-card.angry {
 }
 body.wob .enemy-card.crazy {
 	box-shadow:0 0 5px 1px rgba(20,20,255,1);
+}
+
+body.wob #visualizationarea {
+	border:1px solid white;
+	background:transparent;
 }
 
 /* "Stolen" from twitter bootstrap's CSS with a little modification 
