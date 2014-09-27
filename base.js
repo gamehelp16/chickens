@@ -244,6 +244,13 @@ function update() {
 		}
 	}
 	
+	if(trademap) {
+		$(".trade-portal").show();
+		$(".trade-scroll").show();
+		$(".trade-furnace2").show();
+		$("#til").show();
+	}
+	
 	if(items[24].showinvt || items[24].owned>0) {
 		$(".wheat").show();
 		$(".misc-heading").show();
