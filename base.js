@@ -36,7 +36,7 @@ $(document).ready(function() {
 	items.push({"name":"teleportation device", "owned":0, "showinvt":false}); //26
 	items.push({"name":"furnace4", "owned":0, "showinvt":false}); //27
 	items.push({"name":"compass", "owned":0, "showinvt":false}); //28
-	
+
 	skills=[];
 	skills.push({"name":"Speed", "owned":false, "desc":"Killing chickens is two seconds faster now"}); //0
 	skills.push({"name":"Cooking", "owned":false, "desc":"Using furnace is two seconds faster now"}); //1
@@ -46,11 +46,11 @@ $(document).ready(function() {
 	skills.push({"name":"Statistics", "owned":false, "desc":"Now you can do some statistics job"}); //5
 	skills.push({"name":"Teleportation", "owned":false, "desc":"Now you can use the teleportation device"}); //6
 	skills.push({"name":"Metabolism", "owned":false, "desc":"Iron chicken nugget heals more hp"}); //7
-	
+
 	chickenspop=10000; //10000
 	ironchickenspop=10000; //10000
 	goldchickenspop=10000; //10000
-	
+
 	invtnotif=false;
 	tradernotif=false;
 	beginning=false;
@@ -59,7 +59,7 @@ $(document).ready(function() {
 	tradebetterfurnace=false;
 	introducetp=false;
 	getscroll=false; //false
-	
+
 	playerhp=100;
 	playerhpmax=100;
 	usesound=false;
@@ -73,7 +73,7 @@ $(document).ready(function() {
 	tpdevicestock=5; //5
 	rubysearchstep=0; //0
 	redditspecialstep=0;
-	
+
 	/* NO SAVE */
 	exploring=false;
 	explorechickenverse2=false;
@@ -100,7 +100,7 @@ $(document).ready(function() {
 	rubymeats=1000000000;
 	rubynuggets=0;
 	bossinterval="";
-	
+
 	autosaveinterval=setInterval(function() {
 		autosavetime--;
 		if(autosavetime==0) {
@@ -109,63 +109,63 @@ $(document).ready(function() {
 		}
 		$("#autosave-cd").html(autosavetime);
 	},1000);
-	
-	audio=new Audio("https://dl.dropboxusercontent.com/u/120818218/chickensassets/chicken.mp3");
-	audio2=new Audio("https://dl.dropboxusercontent.com/u/120818218/chickensassets/chicken2.mp3");
-	audio3=new Audio("https://dl.dropboxusercontent.com/u/120818218/chickensassets/chicken3.mp3");
+
+	audio=new Audio("chicken.mp3");
+	audio2=new Audio("chicken2.mp3");
+	audio3=new Audio("chicken3.mp3");
 	/* END NO SAVE*/
-	
-	if(localStorage.chickensgamesave!=="null" && localStorage.chickensgamesave!="") {
+
+	if(localStorage.chickensgamesave) {
 		save("load");
 	}
-	
+
 	if(!invtnotif)$("#mutenotif").animate({"bottom":"-30px"},1000);
 	$("#autosave-cd").html(autosavetime);
-	
+
 	breedchickens();
 	update();
 	setInterval(function() {
 		nbrrobots=items[18].owned;
-		
+
 		chickenmeatget=getRandomInt(2*nbrrobots,10*nbrrobots);
 		if(chickenspop-chickenmeatget>=0) {
 			items[0].owned+=chickenmeatget;
 			chickenspop-=chickenmeatget;
 		}
-		
+
 		ironchickenmeatget=getRandomInt(1*nbrrobots,6*nbrrobots);
 		if(ironchickenspop-ironchickenmeatget>=0) {
 			items[1].owned+=ironchickenmeatget;
 			ironchickenspop-=ironchickenmeatget;
 		}
-		
+
 		goldchickenmeatget=getRandomInt(0*nbrrobots,2*nbrrobots);
 		if(goldchickenspop-goldchickenmeatget>=0) {
 			items[2].owned+=goldchickenmeatget;
 			goldchickenspop-=goldchickenmeatget;
 		}
-		
+
 		update();
 	},3000);
-	
+
 	$(document).keyup(function(e) {
 		if(e.keyCode==77 && !$("#textbased-input").is(':focus')) {
 			togglesound();
 		}
 	});
-	
+
 	$("#textbased-input").keydown(function(e) {
 		kc=e.keyCode;
 		if(kc==13 && $(this).val()!="") {
 			executecmd($(this).val());
 			$(this).val("");
 		}
-		if(kc==37)executecmd("go w"); 
-		if(kc==38)executecmd("go n"); 
-		if(kc==39)executecmd("go e"); 
-		if(kc==40)executecmd("go s"); 
+		if(kc==37)executecmd("go w");
+		if(kc==38)executecmd("go n");
+		if(kc==39)executecmd("go e");
+		if(kc==40)executecmd("go s");
 	});
-	
+
 });
 
 function getRandomInt(min, max) {
@@ -209,12 +209,12 @@ function update() {
 	$(".chickens-pop").html(Math.round(chickenspop).toFixed(0));
 	$(".iron-chickens-pop").html(Math.round(ironchickenspop).toFixed(0));
 	$(".gold-chickens-pop").html(Math.round(goldchickenspop).toFixed(0));
-	
+
 	for(k=0;k<=14;k++) {
 		if(items[k].showinvt || items[k].owned>0) {
 			if(k==0 && !beginning)break;
 			items[k].showinvt=true;
-			
+
 			if(k==0){$(".chicken-meat").show();}
 			if(k==1){$(".iron-chicken-meat").show();}
 			if(k==2){$(".gold-chicken-meat").show();}
@@ -230,7 +230,7 @@ function update() {
 			if(k==12){$(".gold-chicken-nugget").show();}
 			if(k==13){$(".diamond-chicken-nugget").show();}
 			if(k==14){$(".emerald-chicken-nugget").show();}
-			
+
 			if(k>=0&&k<=4) {
 				$(".meats-heading").show();
 			}
@@ -240,29 +240,29 @@ function update() {
 			if(k>=10&&k<=14) {
 				$(".chicken-nuggets-heading").show();
 			}
-			
+
 		}
 	}
-	
+
 	if(trademap) {
 		$(".trade-portal").show();
 		$(".trade-scroll").show();
 		$(".trade-furnace2").show();
 		$("#til").show();
 	}
-	
+
 	if(items[24].showinvt || items[24].owned>0) {
 		$(".wheat").show();
 		$(".misc-heading").show();
 	}
-	
+
 	if(items[26].showinvt || items[26].owned>0) {
 		$(".tpdevice").show();
 		$(".misc-heading").show();
 	}
-	
+
 	$(".skill-exploration").val("Exploration "+parseInt(skills[3].level+1)+" ("+Math.round(Math.pow(10*(skills[3].level+1),0.8))+" gold chicken nuggets)");
-	
+
 	if(items[15].owned==1) {
 		$(".trade-furnace").hide();
 		$("#furnace").show();
@@ -279,7 +279,7 @@ function update() {
 		$(".tab01-delimiter").show();
 		$(".tab1-link").show();
 	}
-	
+
 	if(items[10].owned>0) {
 		if(!unlockedskills)unlockedskills=true;
 	}
@@ -337,7 +337,7 @@ function update() {
 		$(".timesthousand").show();
 		$(".trade-furnace4").hide();
 	}
-	
+
 	if(items[1].showinvt) {
 		if(tool<2) {
 			$(".craft-iron-chicken-sword").show();
@@ -353,7 +353,7 @@ function update() {
 		$(".furnace-gold-chicken-nugget").show();
 		$(".furnace-hardened-gold-chicken-meat").show();
 		$("#furnace-gold-chicken-meat").show();
-		
+
 		if(skills[3].level>=10) {
 			$(".skill-exploration").hide();
 		}
@@ -378,7 +378,7 @@ function update() {
 		$(".furnace-hardened-emerald-chicken-meat").show();
 		$("#furnace-emerald-chicken-meat").show();
 	}
-	
+
 	if(skills[0].owned) {
 		$(".skill-speed").hide();
 	}
@@ -398,7 +398,7 @@ function update() {
 		$(".tab56-delimiter").show();
 		$(".tab6-link").show();
 	}
-	
+
 	no=0;
 	noskill=false;
 	skilllist="";
@@ -418,26 +418,28 @@ function update() {
 			}
 		}
 	}
-	
+
 	if(noskill) {
 		$("#skills").html("<ul><li>No skill</li></ul>");
 	}
 	else {
 		$("#skills").html("<ul>"+skilllist+"</ul>");
 	}
-	
-	if(beginning) {	
+
+	if(beginning) {
 		if(!exploring)$("#inventory").show();
 		if(!exploring)$("#tab").show();
 		$(".tab0-link").show();
 		$(".tab34-delimiter").show();
 		$(".tab4-link").show();
+		$(".tab47-delimiter").show();
+		$(".tab7-link").show();
 	}
 	if(unlockedskills) {
 		$(".tab12-delimiter").show();
 		$(".tab2-link").show();
 	}
-	if(tradebetterfurnace) {	
+	if(tradebetterfurnace) {
 		if(items[21].owned!=1) {
 			$(".trade-furnace3").show();
 		}
@@ -460,13 +462,13 @@ function update() {
 			$(".skill-metabolism").hide();
 		}
 	}
-	
+
 	$(".craft-robot").val("Make a Robot ("+Math.round(Math.pow(10*(items[18].owned+1),1.5))+" iron chicken nuggets)");
-	
+
 	/* ARMOR STUFFS */
-	
+
 	if(skills[4].owned) {
-	
+
 		if(helmet==0) {
 			$(".craft-chicken-helmet").show();
 			$(".craft-iron-chicken-helmet").hide();
@@ -509,7 +511,7 @@ function update() {
 			$(".craft-diamond-chicken-helmet").hide();
 			$(".craft-emerald-chicken-helmet").hide();
 		}
-		
+
 		if(chestplate==0) {
 			$(".craft-chicken-chestplate").show();
 			$(".craft-iron-chicken-chestplate").hide();
@@ -552,7 +554,7 @@ function update() {
 			$(".craft-diamond-chicken-chestplate").hide();
 			$(".craft-emerald-chicken-chestplate").hide();
 		}
-	
+
 		if(leggings==0) {
 			$(".craft-chicken-leggings").show();
 			$(".craft-iron-chicken-leggings").hide();
@@ -595,7 +597,7 @@ function update() {
 			$(".craft-diamond-chicken-leggings").hide();
 			$(".craft-emerald-chicken-leggings").hide();
 		}
-		
+
 		if(boots==0) {
 			$(".craft-chicken-boots").show();
 			$(".craft-iron-chicken-boots").hide();
@@ -638,7 +640,7 @@ function update() {
 			$(".craft-diamond-chicken-boots").hide();
 			$(".craft-emerald-chicken-boots").hide();
 		}
-		
+
 	}
 	else {
 		$(".craft-chicken-helmet").hide();
@@ -662,19 +664,19 @@ function update() {
 		$(".craft-diamond-chicken-boots").hide();
 		$(".craft-emerald-chicken-boots").hide();
 	}
-	
+
 	/* END ARMOR STUFFS */
-	
+
 	$("#mini-invt").html("");
 	for(q=0;q<battleinvt.length;q++) {
 		qwe=$("#mini-invt").html();
 		$("#mini-invt").html(qwe+'<tr><td class="invt-item-name">'+totitlecase(items[battleinvt[q].itemid].name)+'</td><td class="invt-item-owned">'+battleinvt[q].owned+'</td></tr>');
 	}
-	
+
 	$(".trade-tpdevice input").val("Trade a teleportation device for 2 diamond chicken meats ("+tpdevicestock+" left)");
-	
+
 	if(rubysearchstep>0)document.title="Chickens!: The Quest of the Ruby Chicken Meat";
-	
+
 	if(getscroll) {
 		if(tool<=10)$("#craft-chickenators").show();
 		if(items[27].owned==0)$(".trade-furnace4").show();
@@ -682,7 +684,7 @@ function update() {
 		$(".trade-compass").show();
 		if(tool<6)$(".craft-chickenator-onethousand").show();
 	}
-	
+
 	if(tool>0) {$(".craft-chicken-sword").hide();}
 	if(tool>1) {$(".craft-iron-chicken-sword").hide();}
 	if(tool>2) {$(".craft-gold-chicken-sword").hide();}
@@ -694,13 +696,13 @@ function update() {
 	if(tool>8) {$(".craft-chickenator-eightthousand").hide();}
 	if(tool>9) {$(".craft-chickenator-ninethousand").hide();}
 	if(tool>10) {$(".craft-chickenator-ninenineninenine, #craft-chickenators").hide();}
-	
+
 	if(tool==6) {$(".craft-chickenator-twothousand").show();}
 	if(tool==7) {$(".craft-chickenator-fourthousand").show();}
 	if(tool==8) {$(".craft-chickenator-eightthousand").show();}
 	if(tool==9) {$(".craft-chickenator-ninethousand").show();}
 	if(tool==10) {$(".craft-chickenator-ninenineninenine").show();}
-	
+
 	if(redditspecialstep==0) {
 		rsth="first";
 		rsclue="<li>Open this <a href='http://www.reddit.com/r/chickens_incremental' target='_blank'>game's subreddit</a>, but you must <b title='np.reddit.com'>no</b>t <b title='np.reddit.com'>participate</b></li><li>Slay some chickens</li><li>???</li><li>PROFIT (well, ignore the 3rd and the 4th instruction)</li><li>Hover the bolded words for more clue</li>";
@@ -719,17 +721,17 @@ function update() {
 	}
 	else if(redditspecialstep==4) {
 		rsth="fifth";
-		rsclue="<li>Sorry, but there are no challenges anymore :(</li><li>However, you can help me by suggesting ideas for the next challenge!</li><li>There is a chance I might put it in this game!</li><li>Click <a href='http://www.reddit.com/r/chickens_incremental/wiki/challenges' target='_blank'>here</a> for more info";
+		rsclue="<li>Sorry, but there are no challenges anymore :(</li><li><del>However, you can help me by suggesting ideas for the next challenge!</del></li><li><del>There is a chance I might put it in this game!</del></li><li><del>Click <a href='http://www.reddit.com/r/chickens_incremental/wiki/challenges' target='_blank'>here</a> for more info</del></li><li><b>(2021 UPDATE: I have no more plans to update this game, thank you for going through these challenges though!)</b></li>";
 	}
-	
+
 	$(".rsth").html(rsth);
 	$(".rsclue").html(rsclue);
-	
+
 	if(items[28].owned>=1) {
 		$(".trade-compass").hide();
 		$("#availablecommands").html("Available commands: go, pos, clear, examine, map, exit");
 	}
-	
+
 }
 
 function tab(which) {
@@ -778,18 +780,18 @@ function togglecolor() {
 }
 
 function slaychicken() {
-	
+
 	if(usesound) {
 		whichsound=getRandomInt(1,3);
 		if(whichsound==1)audio.play();
 		if(whichsound==2)audio2.play();
 		if(whichsound==3)audio3.play();
 	}
-	
+
 	if($("#mutenotif").html()=="Press <b>M</b> to toggle sound") {
 		$("#mutenotif").animate({"bottom":"-82px"},1000);
 	}
-	
+
 	if(tool==0) {
 		countdown=7;
 		get=1;
@@ -944,9 +946,9 @@ function slaychicken() {
 		normalget=getRandomInt(25,30);
 		ironget=getRandomInt(20,25);
 		goldget=getRandomInt(15,20);
-		
+
 		if(chickenspop-normalget>=0) {chickenspop-=normalget;}else {normalget=0;}if(ironchickenspop-ironget>=0) {ironchickenspop-=ironget;}else {ironget=0;}if(goldchickenspop-goldget>=0) {goldchickenspop-=goldget;}else {goldget=0;}total=normalget+ironget+goldget;
-		
+
 		$(".notifications").html("You killed "+total+" chicken(s) with a Chickenator 1000 and you got "+normalget+" piece(s) of chicken meat and "+ironget+" piece(s) of iron chicken meat and "+goldget+" piece(s) of gold chicken meat.");
 		items[0].owned+=normalget;
 		items[1].owned+=ironget;
@@ -957,9 +959,9 @@ function slaychicken() {
 		normalget=getRandomInt(30,35);
 		ironget=getRandomInt(25,30);
 		goldget=getRandomInt(20,25);
-		
+
 		if(chickenspop-normalget>=0) {chickenspop-=normalget;}else {normalget=0;}if(ironchickenspop-ironget>=0) {ironchickenspop-=ironget;}else {ironget=0;}if(goldchickenspop-goldget>=0) {goldchickenspop-=goldget;}else {goldget=0;}total=normalget+ironget+goldget;
-		
+
 		$(".notifications").html("You killed "+total+" chicken(s) with a Chickenator 2000 and you got "+normalget+" piece(s) of chicken meat and "+ironget+" piece(s) of iron chicken meat and "+goldget+" piece(s) of gold chicken meat.");
 		items[0].owned+=normalget;
 		items[1].owned+=ironget;
@@ -970,9 +972,9 @@ function slaychicken() {
 		normalget=getRandomInt(40,45);
 		ironget=getRandomInt(35,40);
 		goldget=getRandomInt(30,35);
-		
+
 		if(chickenspop-normalget>=0) {chickenspop-=normalget;}else {normalget=0;}if(ironchickenspop-ironget>=0) {ironchickenspop-=ironget;}else {ironget=0;}if(goldchickenspop-goldget>=0) {goldchickenspop-=goldget;}else {goldget=0;}total=normalget+ironget+goldget;
-		
+
 		$(".notifications").html("You killed "+total+" chicken(s) with a Chickenator 4000 and you got "+normalget+" piece(s) of chicken meat and "+ironget+" piece(s) of iron chicken meat and "+goldget+" piece(s) of gold chicken meat.");
 		items[0].owned+=normalget;
 		items[1].owned+=ironget;
@@ -983,9 +985,9 @@ function slaychicken() {
 		normalget=getRandomInt(80,85);
 		ironget=getRandomInt(55,60);
 		goldget=getRandomInt(50,55);
-		
+
 		if(chickenspop-normalget>=0) {chickenspop-=normalget;}else {normalget=0;}if(ironchickenspop-ironget>=0) {ironchickenspop-=ironget;}else {ironget=0;}if(goldchickenspop-goldget>=0) {goldchickenspop-=goldget;}else {goldget=0;}total=normalget+ironget+goldget;
-		
+
 		$(".notifications").html("You killed "+total+" chicken(s) with a Chickenator 8000 and you got "+normalget+" piece(s) of chicken meat and "+ironget+" piece(s) of iron chicken meat and "+goldget+" piece(s) of gold chicken meat.");
 		items[0].owned+=normalget;
 		items[1].owned+=ironget;
@@ -996,9 +998,9 @@ function slaychicken() {
 		normalget=getRandomInt(85,90);
 		ironget=getRandomInt(60,65);
 		goldget=getRandomInt(55,60);
-		
+
 		if(chickenspop-normalget>=0) {chickenspop-=normalget;}else {normalget=0;}if(ironchickenspop-ironget>=0) {ironchickenspop-=ironget;}else {ironget=0;}if(goldchickenspop-goldget>=0) {goldchickenspop-=goldget;}else {goldget=0;}total=normalget+ironget+goldget;
-		
+
 		$(".notifications").html("You killed "+total+" chicken(s) with a Chickenator 9000 and you got "+normalget+" piece(s) of chicken meat and "+ironget+" piece(s) of iron chicken meat and "+goldget+" piece(s) of gold chicken meat.");
 		items[0].owned+=normalget;
 		items[1].owned+=ironget;
@@ -1009,15 +1011,15 @@ function slaychicken() {
 		normalget=getRandomInt(90,95);
 		ironget=getRandomInt(65,70);
 		goldget=getRandomInt(60,65);
-		
+
 		if(chickenspop-normalget>=0) {chickenspop-=normalget;}else {normalget=0;}if(ironchickenspop-ironget>=0) {ironchickenspop-=ironget;}else {ironget=0;}if(goldchickenspop-goldget>=0) {goldchickenspop-=goldget;}else {goldget=0;}total=normalget+ironget+goldget;
-		
+
 		$(".notifications").html("You killed "+total+" chicken(s) with a Chickenator 9999 and you got "+normalget+" piece(s) of chicken meat and "+ironget+" piece(s) of iron chicken meat and "+goldget+" piece(s) of gold chicken meat.");
 		items[0].owned+=normalget;
 		items[1].owned+=ironget;
 		items[2].owned+=goldget;
 	}
-	
+
 	if(items[0].owned==5) {
 		if(!invtnotif) {
 			$(".notifications").html("Inventory area and tab showed up");
@@ -1030,14 +1032,14 @@ function slaychicken() {
 			tradernotif=true;
 		}
 	}
-	
+
 	if(skills[0].owned) {
 		countdown-=2;
 	}
 	cd(countdown,"slay-chicken","Slay chicken");
-	
+
 	update();
-	
+
 }
 
 function trade(what) {
@@ -1325,7 +1327,7 @@ function craft(what) {
 			$(".notifications").html("You have destroyed a robot, too bad you don't get anything");
 		}
 	}
-	
+
 	else if(what=="chicken helmet") {
 		if(items[5].owned>=50) { helmet=1; items[5].owned-=50; $(".notifications").html("You are now equipped with chicken helmet"); }
 	}
@@ -1338,7 +1340,7 @@ function craft(what) {
 	else if(what=="chicken boots") {
 		if(items[5].owned>=25) { boots=1; items[5].owned-=25; $(".notifications").html("You are now equipped with chicken boots"); }
 	}
-	
+
 	else if(what=="iron chicken helmet") {
 		if(items[6].owned>=50) { helmet=2; items[6].owned-=50; $(".notifications").html("You are now equipped with iron chicken helmet"); }
 	}
@@ -1351,7 +1353,7 @@ function craft(what) {
 	else if(what=="iron chicken boots") {
 		if(items[6].owned>=25) { boots=2; items[6].owned-=25; $(".notifications").html("You are now equipped with iron chicken boots"); }
 	}
-	
+
 	else if(what=="gold chicken helmet") {
 		if(items[7].owned>=50) { helmet=3; items[7].owned-=50; $(".notifications").html("You are now equipped with gold chicken helmet"); }
 	}
@@ -1364,7 +1366,7 @@ function craft(what) {
 	else if(what=="gold chicken boots") {
 		if(items[7].owned>=25) { boots=3; items[7].owned-=25; $(".notifications").html("You are now equipped with gold chicken boots"); }
 	}
-	
+
 	else if(what=="diamond chicken helmet") {
 		if(items[8].owned>=50) { helmet=4; items[8].owned-=50; $(".notifications").html("You are now equipped with diamond chicken helmet"); }
 	}
@@ -1377,7 +1379,7 @@ function craft(what) {
 	else if(what=="diamond chicken boots") {
 		if(items[8].owned>=25) { boots=4; items[8].owned-=25; $(".notifications").html("You are now equipped with diamond chicken boots"); }
 	}
-	
+
 	else if(what=="emerald chicken helmet") {
 		if(items[9].owned>=50) { helmet=5; items[9].owned-=50; $(".notifications").html("You are now equipped with emerald chicken helmet"); }
 	}
@@ -1390,9 +1392,9 @@ function craft(what) {
 	else if(what=="emerald chicken boots") {
 		if(items[9].owned>=25) { boots=5; items[9].owned-=25; $(".notifications").html("You are now equipped with emerald chicken boots"); }
 	}
-	
+
 	if(what.split(" ")[0]=="chickenator") {
-	
+
 		version=what.split(" ")[1];
 		if(version==1000){thetool=6; times=1; text="Finally a chickenator! :o"}
 		if(version==2000){thetool=7; times=1; text="Chickenator 2000 rocks! \\m/"}
@@ -1400,7 +1402,7 @@ function craft(what) {
 		if(version==8000){thetool=9; times=4; text="Chickenator 8000 is so amazing O.O"}
 		if(version==9000){thetool=10; times=1; text="One more step!"}
 		if(version==9999){thetool=11; times=1; text="THE BEST WEAPON EVAR!!!"}
-		
+
 		if(items[9].owned>=times && items[8].owned>=times*10 && items[7].owned>=times*100 && items[6].owned>=times*1000 &&items[5].owned>=times*10000) {
 			tool=thetool;
 			items[5].owned-=times*10000;
@@ -1410,9 +1412,9 @@ function craft(what) {
 			items[9].owned-=times*1;
 			$(".notifications").html(text);
 		}
-		
+
 	}
-	
+
 	update();
 }
 function skill(what) {
@@ -1506,14 +1508,14 @@ function chickenatorprice() {
 	if(tool==8){weaponversion=8000; times=4;}
 	if(tool==9){weaponversion=9000; times=1;}
 	if(tool==10){weaponversion=9999; times=1;}
-	
+
 	if(tool==5) {
 		beginword='To craft a Chickenator '+weaponversion;
 	}
 	else {
 		beginword='To upgrade your current Chickenator to Chickenator '+weaponversion;
 	}
-	
+
 	alert(beginword+', you will need:\n\n'+times+' Hardened Emerald Chicken Meat\n'+times*10+' Hardened Diamond Chicken Meats\n'+times*100+' Hardened Gold Chicken Meats\n'+times*1000+' Hardened Iron Chicken Meats\n'+times*10000+' Hardened Chicken Meats');
 }
 
@@ -1546,8 +1548,8 @@ setInterval(function() {
 			exitportal("die");
 			$(".notifications").html("You almost died in battle, phew!");
 		}
-		
-		
+
+
 		update_battle();
 		update();
 	}
@@ -1585,7 +1587,7 @@ function update_battle() {
 	$("#player-chestplate").html(numbertotext(chestplate));
 	$("#player-leggings").html(numbertotext(leggings));
 	$("#player-boots").html(numbertotext(boots));
-	
+
 	if(tool==0) {
 		playerdmg=1;
 		playerweapon="Fists :o";
@@ -1634,7 +1636,7 @@ function update_battle() {
 		playerdmg=16;
 		playerweapon="Chickenator 9999";
 	}
-	
+
 	if(battleinvt[2].owned>0 && kmexplored!=0) {
 		$("#use-tpdevice").css("display","inline-block");
 		if(tpdevicekm!=kmexplored) {
@@ -1648,26 +1650,26 @@ function update_battle() {
 	else {
 		$("#use-tpdevice").hide();
 	}
-	
+
 	$("#player-dmg").html(playerdmg);
 	$("#player-weapon").html(playerweapon);
-	
+
 	if(enemies.length==0) {
 		asddsa="a";
 	}
 	else {
 		asddsa=enemies[0].name;
 	}
-	
+
 	if(asddsa!="cliff") {
-	
+
 		if(explorechickenverse2) {
 			divname="enemycardarea";
 		}
 		else {
 			divname="battle-log";
 		}
-		
+
 		bl=$("#"+divname).html();
 		totalenemies=0;
 		for(i=0;i<enemies.length;i++) {
@@ -1678,7 +1680,7 @@ function update_battle() {
 				else {
 					atkbutton='<input type="button" value="Attack! ['+enemies[i].iscd+']" onclick="attackenemy('+i+')" id="attack-enemy-'+i+'" disabled="disabled">';
 				}
-			
+
 				if(enemies[i].name.substr(0,5)=="Angry") {
 					additionalclass=" angry";
 				}
@@ -1688,7 +1690,7 @@ function update_battle() {
 				else {
 					additionalclass="";
 				}
-			
+
 				$("#"+divname).html(bl+'<div class="enemy-card'+additionalclass+'"><b>'+enemies[i].name+'</b><br>HP: '+enemies[i].hp+' / '+enemies[i].maxhp+'<br>Damage: '+enemies[i].dmg+'<br>'+atkbutton+'</div>');
 				if(enemies[i].drop!=999999) {
 					totalenemies++;
@@ -1709,7 +1711,7 @@ function update_battle() {
 						else {
 							takebutton='<input type="button" value="Take! ['+thisdrop.iscd+']" onclick="takedrop('+enemies[i].id+')" id="take-drop-'+enemies[i].id+'">';
 						}
-			
+
 						asddsa=thisdrop.drop;
 						$("#"+divname).html(bl+'<div class="enemy-card ec-drop">The <b>'+thisdrop.from+'</b> drops a piece of '+items[asddsa].name+takebutton+'</div>');
 					}
@@ -1724,7 +1726,7 @@ function update_battle() {
 			bl=$("#"+divname).html();
 		}
 		$("#enemycardarea").html($("#enemycardarea").html()+"<br><br>");
-		
+
 	} //end if name cliff
 	else {
 		getscroll=true;
@@ -1759,11 +1761,11 @@ scroll='\n\
 		$("#battle-log").html("You ended up in a cliff<br>You wondered why there is a cliff<br>No more chickens????<br><br>But you found a chest that contains this scroll:<br><pre>"+scroll+"</pre>");
 		$(".notifications").html("Hmm... maybe the trader knows something about the legendary mutant chicken");
 	}
-	
+
 	if(kmexplored==0 && tpdevicekm!=0) {
 		$("#battle-log").html('<input type="button" value="Teleport to the teleport device! ('+tpdevicekm+' km)" id="button-tp" onclick="tptotpdevice()">');
 	}
-	
+
 	if(totalenemies==0) {
 		thereisenemy=false;
 		healcd=false;
@@ -1786,18 +1788,18 @@ scroll='\n\
 		$("#explore-further").attr("disabled","disabled");
 		$("#exit-portal").attr("disabled","disabled");
 	}
-	
+
 	/*totaldrops=0;
 	for(i=0;i<drops.length;i++) {
 		if(!drops[i].taken) {
-		
+
 			if(drops[i].iscd==0) {
 				takebutton='<input type="button" value="Take!" onclick="takedrop('+i+')" id="take-drop-'+i+'">';
 			}
 			else {
 				takebutton='<input type="button" value="Take! ['+drops[i].iscd+']" onclick="takedrop('+i+')" id="take-drop-'+i+'">';
 			}
-			
+
 			asddsa=drops[i].drop;
 			$("#battle-log").html(bl+'<div class="enemy-card ec-drop">The <b>'+drops[i].from+'</b> drops a piece of '+items[asddsa].name+takebutton+'</div>');
 			totaldrops++;
@@ -1807,7 +1809,7 @@ scroll='\n\
 		}
 		bl=$("#battle-log").html();
 	}*/
-	
+
 	update();
 }
 
@@ -1826,12 +1828,12 @@ function enterportal() {
 				cnqty=Math.abs(Math.round(parseFloat(cnqty)));
 				icnqty=Math.abs(Math.round(parseFloat(icnqty)));
 				tpdqty=Math.abs(Math.round(parseFloat(tpdqty)));
-				
+
 				if(cnqty>items[10].owned || icnqty>items[11].owned || tpdqty>items[26].owned) {
 					alert('You can\'t bring what you don\'t have');
 				}
 				else {
-					
+
 					items[10].owned-=cnqty;
 					items[11].owned-=icnqty;
 					items[26].owned-=tpdqty;
@@ -1839,21 +1841,21 @@ function enterportal() {
 					battleinvt.push({itemid:11, owned:icnqty});
 					battleinvt.push({itemid:26, owned:tpdqty});
 					save('local');
-					
+
 					playerhp=100+helmet*10+chestplate*20+leggings*15+boots*5;
 					playerhpmax=100+helmet*10+chestplate*20+leggings*15+boots*5;
-					
+
 					if(redditspecialstep>=4) {
 						playerhp+=100;
 						playerhpmax+=100;
 					}
-					
+
 					update_battle();
 					$("#player-stats").show();
 					$("#before-adventure, #tab, #inventory").hide();
 					exploring=true;
 					reset_battle();
-						
+
 
 					if(cnqty==1234&&icnqty==567) {
 						explorechickenverse2=true;
@@ -1864,37 +1866,37 @@ function enterportal() {
 						}
 						else {
 							$("#notificationlog").html("<p>You are now here, at the Chickenverse 2.0<br>In front of you there is a mysterious hole</p>");
-							
+
 							rooms=[];
 							newrooms=[];
 							playerlocation="outside2";
 							thereisroom=false;
 							pathnotorch=false;
-							
+
 							addroom(1000,1000,"c");
 							chance=0.5;
-							
+
 							generatepath(1000,1001,"n",1);
 							generatepath(1001,1000,"e",1);
 							generatepath(999,1000,"w",1);
 							generatepath(1000,999,"s",1);
-							
+
 							$("#textbased-input").val("");
 							$("#textbased-input").focus();
-							
+
 							/*for(i=0;i<newrooms.length;i++) {
-							
+
 							    if(caverooms>=roomlimit) {
 							        console.log("limit");
 							        break;
 							    }
-							
+
 							    x=parseInt(newrooms[i].x);
 							    y=parseInt(newrooms[i].y);
 							    z=false;
-							
+
 								console.log("i "+i);
-							
+
 							    if(Math.random()<0.45 && newrooms[i].a) {
 									//if(!roomexist(x-2,y) && !roomexist(x-1,y-1) && !roomexist(x-1,y-2) && !roomexist(x-1,y)) {
 										addroom(x-1,y);
@@ -1925,18 +1927,18 @@ function enterportal() {
 							    }
 								console.log(rooms.length+" rooms");
 							    if(z)removeroomn(i);
-							
+
 							    caverooms++;
-							
+
 							}*/
-							
+
 						}
 					}
 					else {
 						$(".notifications").html("Never hesitate to explore, just explore as far as you can! Something is waiting you at the end...");
 						$("#adventure").show();
 					}
-					
+
 				}
 			}
 		}
@@ -1949,30 +1951,30 @@ function exitportal(reason) {
 	$("#adventure, #chickenverse2, #player-stats, #bossbattleftw").hide();
 	exploring=false;
 	reset_battle();
-	
+
 	if(reason=="button") {
 		for(e=0;e<battleinvt.length;e++) {
 			items[battleinvt[e].itemid].owned+=battleinvt[e].owned;
 		}
 	}
-	
+
 	update();
 	battleinvt=[];
-	
+
 }
 function explorefurther() {
 
 	enemies=[];
 	drops=[];
-	
+
 	for(i=0;i<dropscd.length;i++) {
 		clearTimeout(dropscd[i]);
 	}
-	
+
 	kmexplored+=5;
 	kmexplored+=skills[3].level;
 	battleinvt[0].owned-=1;
-	
+
 	if(kmexplored>=50) {
 		if(!tradebetterfurnace) {
 			tradebetterfurnace=true;
@@ -1980,7 +1982,7 @@ function explorefurther() {
 			update();
 		}
 	}
-	
+
 	if(kmexplored>=300) {
 		if(!introducetp) {
 			introducetp=true;
@@ -1988,7 +1990,7 @@ function explorefurther() {
 			update();
 		}
 	}
-	
+
 	if(kmexplored>=20 && kmexplored<30) {
 		if(getRandomInt(1,3)!=1) {
 			a=getRandomInt(1,3);
@@ -2267,18 +2269,18 @@ function explorefurther() {
 	else if(kmexplored>=1800) {
 		makeenemy("cliff",0,0,0);
 	}
-	
+
 	if(rubysearchstep>0){if(kmexplored>=1500 && kmexplored<1800)$(".notifications").html("Still no chickens :/");}
-	
+
 	if(kmexplored>=100 && items[23].owned==0) {
 		makeenemy("Chest",23,15,0);
 	}
-	
+
 	update_battle();
 }
 function attackenemy(i) {
 	enemies[i].hp-=playerdmg;
-	
+
 	if(enemies[i].hp<=0) {
 		enemies[i].hp=0;
 		enemies[i].isdead=true;
@@ -2308,7 +2310,7 @@ function makeenemy(name,drop,hp,dmg) {
 	else {
 		chance=1;
 	}
-	
+
 	enemies.push({"name":name, "dmg":dmg, "hp":hp, "maxhp":hp, "isdead":false, "drop":drop, "iscd":0, "chance":chance, "id":enemies.length});
 }
 function takedrop(i) {
@@ -2319,7 +2321,7 @@ function takedrop(i) {
 		}
 	}
 	thisdrop.taken=true;
-	
+
 	itemexists=9999999999;
 	for(w=0;w<battleinvt.length;w++) {
 		if(battleinvt[w].itemid==thisdrop.drop) {
@@ -2327,36 +2329,36 @@ function takedrop(i) {
 			break;
 		}
 	}
-	
+
 	if(itemexists==9999999999) {
 		battleinvt.push({itemid:thisdrop.drop, owned:1});
 	}
 	else {
 		battleinvt[itemexists].owned+=1;
 	}
-	
+
 	update_battle();
 }
 function heal() {
 	if(battleinvt[1].owned>=1 && playerhp!=playerhpmax) {
-	
+
 		battleinvt[1].owned--;
-		
+
 		if(healcd || bossbattleiscommencing) {
 			cd(7,"heal-battle","Heal (1 iron chicken nugget)");
 		}
-		
+
 		if(skills[7].owned) {
 			playerhp+=15;
 		}
 		else {
 			playerhp+=5;
 		}
-		
+
 		if(playerhp>=playerhpmax) {
 			playerhp=playerhpmax;
 		}
-		
+
 		update_battle();
 		update();
 	}
@@ -2561,11 +2563,11 @@ function executecmd(cmd) {
 				output='Usage:<br>\'go n\': go north<br>\'go e\': go east<br>\'go w\': go west<br>\'go s\': go south<br><br>You can also use arrow keys to move (but the input box must be focused)';
 			}
 		}
-		
+
 		if(spawnnewenemy) {
 			output=output+"<br>There are some chickens here... better kill them first before exploring further";
 		}
-	
+
 		if(playerlocation=="outside2" || playerlocation=="outside1" ||  playerlocation=="outside"){}
 		else {
 			cavepos=playerlocation.replace("cave","").split("x");
@@ -2573,9 +2575,9 @@ function executecmd(cmd) {
 				output=output+"<br>This room has no torch inside while other rooms have torches, this is weird :/";
 			}
 		}
-		
+
 		updateminimap();
-		
+
 	}
 	else if(cmd[0]=="tp") { //for testing purposes only, maybe :p
 		playerlocation="cave"+cmd[1]+"x"+cmd[2];
@@ -2671,11 +2673,11 @@ function executecmd(cmd) {
 	else {
 		output='Command does not exist';
 	}
-	
+
 	$("#cangoto").html("");
-	
+
 	if(playerlocation=="outside2" || playerlocation=="outside1" ||  playerlocation=="outside")$("#cangoto").html("north (&uarr;)");
-	
+
 	if(playerlocation.substring(0,4)=="cave") {
 		cavepos=playerlocation.replace("cave","").split("x");
 		if(roomexist(cavepos[0],parseInt(cavepos[1])+1)) {
@@ -2692,16 +2694,16 @@ function executecmd(cmd) {
 		}
 		qwerty=$("#cangoto").html();
 		$("#cangoto").html(qwerty.substr(0,$("#cangoto").html().length-2));
-		
+
 		if(rooms[roomid(cavepos[0],cavepos[1])].c=="cn") {
 			rooms[roomid(cavepos[0],cavepos[1])].c="none";
 			bonuscn=getRandomInt(5,15);
 			battleinvt[0].owned+=bonuscn;
 			output=output+"<br><br>You found "+bonuscn+" chicken nuggets inside a chest inside this room, you are lucky!";
 		}
-		
+
 	}
-	
+
 	addtolog(output);
 	update_battle();
 }
@@ -2782,32 +2784,32 @@ function roomid(x,y) {
 }
 
 /*
-	
+
 	name, drop, hp, damage
-	
+
 	makeenemy("Chicken",0,1,0);
 	makeenemy("Angry Chicken",0,1,1);
 	makeenemy("Crazy Chicken",0,3,3);
-	
+
 	makeenemy("Iron Chicken",1,3,0);
 	makeenemy("Angry Iron Chicken",1,3,2);
 	makeenemy("Crazy Iron Chicken",1,5,4);
-	
+
 	makeenemy("Gold Chicken",2,5,0);
 	makeenemy("Angry Gold Chicken",2,5,4);
 	makeenemy("Crazy Gold Chicken",2,7,7);
-	
+
 	makeenemy("Diamond Chicken",3,7,3);
 	makeenemy("Angry Diamond Ch.",3,7,6);
 	makeenemy("Crazy Diamond Ch.",3,9,9);
-	
+
 	makeenemy("Emerald Chicken",4,10,5);
 	makeenemy("Angry Emerald Ch.",4,10,8);
 	makeenemy("Crazy Emerald Ch.",4,12,11);
-	
+
 	makeenemy("Glitched Chicken",999999,1,0);
 	makeenemy("Angry Glitched Ch.",999999,1,1);
-	
+
 */
 
 function spawnenemy() {
@@ -2922,7 +2924,7 @@ function bossbattle() {
 	healcd=true;
 	endgame=false;
 	chickenstun=0;
-	
+
 	bossinterval=setInterval(function() {
 		if(bosshealth>0 && !endgame && bossbattleiscommencing) {
 			if(chickenstun>0) {
@@ -2944,9 +2946,9 @@ function bossbattle() {
 			if(typeof bossinterval !== "undefined")clearInterval(bossinterval);
 		}
 	},5000);
-	
+
 	updateboss();
-	
+
 }
 
 function updateboss() {
@@ -3063,16 +3065,16 @@ function save(what,param2) {
 		return btoa(items[0].owned+"|"+items[1].owned+"|"+items[2].owned+"|"+items[3].owned+"|"+items[4].owned+"|"+items[5].owned+"|"+items[6].owned+"|"+items[7].owned+"|"+items[8].owned+"|"+items[9].owned+"|"+items[10].owned+"|"+items[11].owned+"|"+items[12].owned+"|"+items[13].owned+"|"+items[14].owned+"|"+items[15].owned+"|"+items[16].owned+"|"+items[17].owned+"|"+items[18].owned+"|"+items[19].owned+"|"+items[20].owned+"|"+items[21].owned+"|"+items[22].owned+"|"+items[23].owned+"|"+items[24].owned+"|"+items[25].owned+"|"+skills[0].owned+"|"+skills[1].owned+"|"+skills[2].owned+"|"+skills[3].owned+"|"+skills[3].level+"|"+skills[4].owned+"|"+skills[5].owned+"|"+skills[6].owned+"|"+skills[7].owned+"|"+chickenspop+"|"+ironchickenspop+"|"+goldchickenspop+"|"+invtnotif+"|"+tradernotif+"|"+beginning+"|"+unlockedskills+"|"+trademap+"|"+tradebetterfurnace+"|"+introducetp+"|"+playerhp+"|"+playerhpmax+"|"+usesound+"|"+tool+"|"+helmet+"|"+chestplate+"|"+leggings+"|"+boots+"|"+breedinterval+"|"+items[26].owned+"|"+tpdevicekm+"|"+tpdevicestock+"|"+rubysearchstep+"|"+getscroll+"|"+items[27].owned+"|"+redditspecialstep+"|"+items[28].owned);
 	}
 	else if(what=="splitter") {
-	
+
 		if(typeof param2 === "undefined") {
 			tehcodez=localStorage.chickensgamesave;
 		}
 		else {
 			tehcodez=param2;
 		}
-		
+
 		tehcodez=atob(tehcodez).split("|");
-		
+
 		items[0].owned = parseFloat(tehcodez[0]);
 		items[1].owned = parseFloat(tehcodez[1]);
 		items[2].owned = parseFloat(tehcodez[2]);
@@ -3127,7 +3129,7 @@ function save(what,param2) {
 		leggings = parseFloat(tehcodez[51]);
 		boots = parseFloat(tehcodez[52]);
 		breedinterval = parseFloat(tehcodez[53]);
-		
+
 		if(tehcodez.length>=55) {items[26].owned = parseFloat(tehcodez[54]);}else {items[26].owned = 0;}
 		if(tehcodez.length>=56) {tpdevicekm = parseFloat(tehcodez[55]);} else {tpdevicekm = 0;}
 		if(tehcodez.length>=57) {tpdevicestock = parseFloat(tehcodez[56]);} else {tpdevicestock = 5;}
@@ -3136,24 +3138,24 @@ function save(what,param2) {
 		if(tehcodez.length>=60) {items[27].owned = parseFloat(tehcodez[59]);}else {items[27].owned = 0;}
 		if(tehcodez.length>=61) {redditspecialstep = parseFloat(tehcodez[60]);}else {redditspecialstep = 0;}
 		if(tehcodez.length>=62) {items[28].owned = parseFloat(tehcodez[61]);}else {items[28].owned = 0;}
-		
+
 		if(breedinterval<1500) {
 			breedinterval+=1000;
 		}
-		
+
 		update();
 
 	}
 }
 
 /*
-	  ______ _   _ _____        _____          __  __ ______ 
+	  ______ _   _ _____        _____          __  __ ______
  	 |  ____| \ | |  __ \      / ____|   /\   |  \/  |  ____|
- 	 | |__  |  \| | |  | |    | |  __   /  \  | \  / | |__   
- 	 |  __| | . ` | |  | |    | | |_ | / /\ \ | |\/| |  __|  
- 	 | |____| |\  | |__| |    | |__| |/ ____ \| |  | | |____ 
+ 	 | |__  |  \| | |  | |    | |  __   /  \  | \  / | |__
+ 	 |  __| | . ` | |  | |    | | |_ | / /\ \ | |\/| |  __|
+ 	 | |____| |\  | |__| |    | |__| |/ ____ \| |  | | |____
  	 |______|_| \_|_____/      \_____/_/    \_\_|  |_|______|
-                                                         
+
 */
 
 function thefinal() {

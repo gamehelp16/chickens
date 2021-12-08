@@ -549,6 +549,11 @@ input[type=button] {
 input[type=button]:hover, input[disabled] {
 	background:rgba(0,0,0,.1);
 }
+#wrapper {
+	min-height: calc(100vh - 153px);
+	padding-bottom: 60px;
+	box-sizing: border-box;
+}
 .notifications {
 	position:fixed;
 	left:0;
@@ -559,11 +564,14 @@ input[type=button]:hover, input[disabled] {
 	z-index:1000;
 	word-wrap:break-word;
 }
+#ads {
+	padding-bottom: 28px;
+}
 #inventory, #respawninvt {
 	position:fixed;
 	top:10px;
 	right:25px;
-	width:250px;
+	width:300px;
 	padding:10px;
 }
 #inventory fieldset table, #mini-invt, #respawninvt fieldset table {
@@ -587,6 +595,9 @@ pre {
 }
 #tab span.active {
 	text-decoration:underline;
+}
+#tab7 {
+	width:700px;
 }
 #inventory tr td {
 	padding:0 0 3px 0;
@@ -771,5 +782,5 @@ body.wob #visualizationarea {
 	background:transparent;
 }
 
-/* "Stolen" from twitter bootstrap's CSS with a little modification 
+/* "Stolen" from twitter bootstrap's CSS with a little modification
 fieldset{padding:0;margin:0;border:0}legend{display:block;width:100%;padding:0;margin-bottom:20px;font-size:21px;line-height:40px;color:#333;border:0;border-bottom:1px solid #e5e5e5;font-family:helvetica;}legend small{font-size:15px;color:#999} */

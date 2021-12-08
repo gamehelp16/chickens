@@ -1,28 +1,40 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 
-<!-- 
+<!--
 
 	The day I started making this game: 04 Feb 2014
 	The day I finished making this game: 31 Jul 2014 around 21:40 my time
-	
+
 	The reason it's so slow is because I don't really super focus in making this game, you know, watching minecraft vids and browsing reddit makes me sometimes lazy to continue making this game :d
-	
+
 -->
 
 <head>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-53427469-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-53427469-1');
+	</script>
+
 	<meta charset="UTF-8">
 	<title>Chickens!</title>
-	<link rel="shortcut icon" type="image/png" href="https://dl.dropboxusercontent.com/u/120818218/chickensassets/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="style.css" media="all" />
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="base.js"></script>
 </head>
 <body>
-	
+
 	<div id="mutenotif">Press <b>M</b> to toggle sound</div>
 	<div class="notifications"></div>
-	
+
+	<div id="wrapper">
 	<div id="tabbing">
 		<div id="tab" class="hidden">
 			<span onclick="tab(0)" class="tab0-link active">Your Base</span>
@@ -38,10 +50,12 @@
 			<span onclick="tab(5)" class="tab5-link hidden">Reddit Special</span>
 			<span class="tab34-delimiter hidden"> | </span>
 			<span onclick="tab(4)" class="tab4-link hidden">Menu</span>
+			<span class="tab47-delimiter hidden"> | </span>
+			<span onclick="tab(7)" class="tab7-link hidden">Dec 2021 Message<small><b style="color:red;background:white;display:inline-block;margin-left:6px;">(new!)</b></small></span>
 			<br><br>
 		</div>
 	</div>
-	
+
 	<div id="invtwrap">
 	<div id="inventory" class="hidden">
 		<fieldset>
@@ -140,7 +154,7 @@
 		</fieldset>
 	</div>
 	</div>
-	
+
 	<div id="respawninvt" class="hidden">
 		<fieldset>
 			<legend>Inventory</legend>
@@ -166,79 +180,79 @@
 			</table>
 		</fieldset>
 	</div>
-	
+
 	<div id="tab0">
 		<input type="button" value="Slay chicken" onclick="slaychicken()" id="slay-chicken" style="display:inline-block;">&nbsp;&nbsp;&nbsp;<span id="til" style="display:none;">TIL that although chickens do breed, they will extinct if I kill to many of them</span><Br>
 		<div id="furnace" class="hidden">
-		
+
 			<h2>Furnace:</h2>
-			
+
 			<input type="button" value="x1000" onclick="furnace('hardened chicken meat',1000)" class="furnace-hardened-chicken-meat-thousand timesthousand" style="display:none;">
 			<input type="button" value="x100" onclick="furnace('hardened chicken meat',100)" class="furnace-hardened-chicken-meat-hundred timeshundred" style="display:none;">
 			<input type="button" value="x10" onclick="furnace('hardened chicken meat',10)" class="furnace-hardened-chicken-meat-ten timesten" style="display:none;">
 			<input type="button" value="1 Chicken Meat -> 1 Hardened Chicken Meat" onclick="furnace('hardened chicken meat',1)" class="furnace-hardened-chicken-meat" class="btn btn-info btn-large"> <br>
-			
+
 			<input type="button" value="x1000" onclick="furnace('chicken nugget',1000)" class="furnace-chicken-nugget-thousand timesthousand" style="display:none;">
 			<input type="button" value="x100" onclick="furnace('chicken nugget',100)" class="furnace-chicken-nugget-hundred timeshundred" style="display:none;">
 			<input type="button" value="x10" onclick="furnace('chicken nugget',10)" class="furnace-chicken-nugget-ten timesten" style="display:none;">
 			<input type="button" value="1 Chicken Meat -> 1 Chicken Nugget" onclick="furnace('chicken nugget',1)" class="furnace-chicken-nugget"><br>
-			
+
 			<div id="furnace-iron-chicken-meat" style="display:none;">
-			
+
 				<input type="button" value="x1000" onclick="furnace('hardened iron chicken meat',1000)" class="furnace-hardened-iron-chicken-meat-thousand timesthousand" style="display:none;">
 				<input type="button" value="x100" onclick="furnace('hardened iron chicken meat',100)" class="furnace-hardened-iron-chicken-meat-hundred timeshundred" style="display:none;">
 				<input type="button" value="x10" onclick="furnace('hardened iron chicken meat',10)" class="furnace-hardened-iron-chicken-meat-ten timesten" style="display:none;">
-				<input type="button" value="1 Iron Chicken Meat -> 1 Hardened Iron Chicken Meat" onclick="furnace('hardened iron chicken meat',1)" class="furnace-hardened-iron-chicken-meat" style="display:none;"><br> 
-				
+				<input type="button" value="1 Iron Chicken Meat -> 1 Hardened Iron Chicken Meat" onclick="furnace('hardened iron chicken meat',1)" class="furnace-hardened-iron-chicken-meat" style="display:none;"><br>
+
 				<input type="button" value="x1000" onclick="furnace('iron chicken nugget',1000)" class="furnace-iron-chicken-nugget-thousand timesthousand" style="display:none;">
 				<input type="button" value="x100" onclick="furnace('iron chicken nugget',100)" class="furnace-iron-chicken-nugget-hundred timeshundred" style="display:none;">
 				<input type="button" value="x10" onclick="furnace('iron chicken nugget',10)" class="furnace-iron-chicken-nugget-ten timesten" style="display:none;">
-				<input type="button" value="1 Iron Chicken Meat -> 1 Iron Chicken Nugget" onclick="furnace('iron chicken nugget',1)" class="furnace-iron-chicken-nugget" style="display:none;"> 
-				
+				<input type="button" value="1 Iron Chicken Meat -> 1 Iron Chicken Nugget" onclick="furnace('iron chicken nugget',1)" class="furnace-iron-chicken-nugget" style="display:none;">
+
 			</div>
-			
+
 			<div id="furnace-gold-chicken-meat" style="display:none;">
-			
+
 				<input type="button" value="x1000" onclick="furnace('hardened gold chicken meat',1000)" class="furnace-hardened-gold-chicken-meat-thousand timesthousand" style="display:none;">
 				<input type="button" value="x100" onclick="furnace('hardened gold chicken meat',100)" class="furnace-hardened-gold-chicken-meat-hundred timeshundred" style="display:none;">
 				<input type="button" value="x10" onclick="furnace('hardened gold chicken meat',10)" class="furnace-hardened-gold-chicken-meat-ten timesten" style="display:none;">
 				<input type="button" value="1 Gold Chicken Meat -> 1 Hardened Gold Chicken Meat" onclick="furnace('hardened gold chicken meat',1)" class="furnace-hardened-gold-chicken-meat" style="display:none;"> <br>
-			
+
 				<input type="button" value="x1000" onclick="furnace('gold chicken nugget',1000)" class="furnace-gold-chicken-nugget-thousand timesthousand" style="display:none;">
 				<input type="button" value="x100" onclick="furnace('gold chicken nugget',100)" class="furnace-gold-chicken-nugget-hundred timeshundred" style="display:none;">
 				<input type="button" value="x10" onclick="furnace('gold chicken nugget',10)" class="furnace-gold-chicken-nugget-ten timesten" style="display:none;">
-				<input type="button" value="1 Gold Chicken Meat -> 1 Gold Chicken Nugget" onclick="furnace('gold chicken nugget',1)" class="furnace-gold-chicken-nugget" style="display:none;"> 
-				
+				<input type="button" value="1 Gold Chicken Meat -> 1 Gold Chicken Nugget" onclick="furnace('gold chicken nugget',1)" class="furnace-gold-chicken-nugget" style="display:none;">
+
 			</div>
-			
+
 			<div id="furnace-diamond-chicken-meat" style="display:none;">
-			
+
 				<input type="button" value="x1000" onclick="furnace('hardened diamond chicken meat',1000)" class="furnace-hardened-diamond-chicken-meat-thousand timesthousand" style="display:none;">
 				<input type="button" value="x100" onclick="furnace('hardened diamond chicken meat',100)" class="furnace-hardened-diamond-chicken-meat-hundred timeshundred" style="display:none;">
 				<input type="button" value="x10" onclick="furnace('hardened diamond chicken meat',10)" class="furnace-hardened-diamond-chicken-meat-ten timesten" style="display:none;">
 				<input type="button" value="1 Diamond Chicken Meat -> 1 Hardened Diamond Chicken Meat" onclick="furnace('hardened diamond chicken meat',1)" class="furnace-hardened-diamond-chicken-meat" style="display:none;"> <br>
-			
+
 				<input type="button" value="x1000" onclick="furnace('diamond chicken nugget',1000)" class="furnace-diamond-chicken-nugget-thousand timesthousand" style="display:none;">
 				<input type="button" value="x100" onclick="furnace('diamond chicken nugget',100)" class="furnace-diamond-chicken-nugget-hundred timeshundred" style="display:none;">
 				<input type="button" value="x10" onclick="furnace('diamond chicken nugget',10)" class="furnace-diamond-chicken-nugget-ten timesten" style="display:none;">
-				<input type="button" value="1 Diamond Chicken Meat -> 1 Diamond Chicken Nugget" onclick="furnace('diamond chicken nugget',1)" class="furnace-diamond-chicken-nugget" style="display:none;"> 
-			
+				<input type="button" value="1 Diamond Chicken Meat -> 1 Diamond Chicken Nugget" onclick="furnace('diamond chicken nugget',1)" class="furnace-diamond-chicken-nugget" style="display:none;">
+
 			</div>
-			
+
 			<div id="furnace-emerald-chicken-meat" style="display:none;">
-			
+
 				<input type="button" value="x1000" onclick="furnace('hardened emerald chicken meat',1000)" class="furnace-hardened-emerald-chicken-meat-thousand timesthousand" style="display:none;">
 				<input type="button" value="x100" onclick="furnace('hardened emerald chicken meat',100)" class="furnace-hardened-emerald-chicken-meat-hundred timeshundred" style="display:none;">
 				<input type="button" value="x10" onclick="furnace('hardened emerald chicken meat',10)" class="furnace-hardened-emerald-chicken-meat-ten timesten" style="display:none;">
 				<input type="button" value="1 Emerald Chicken Meat -> 1 Hardened Emerald Chicken Meat" onclick="furnace('hardened emerald chicken meat',1)" class="furnace-hardened-emerald-chicken-meat" style="display:none;"> <br>
-			
+
 				<input type="button" value="x1000" onclick="furnace('emerald chicken nugget',1000)" class="furnace-emerald-chicken-nugget-thousand timesthousand" style="display:none;">
 				<input type="button" value="x100" onclick="furnace('emerald chicken nugget',100)" class="furnace-emerald-chicken-nugget-hundred timeshundred" style="display:none;">
 				<input type="button" value="x10" onclick="furnace('emerald chicken nugget',10)" class="furnace-emerald-chicken-nugget-ten timesten" style="display:none;">
-				<input type="button" value="1 Emerald Chicken Meat -> 1 Emerald Chicken Nugget" onclick="furnace('emerald chicken nugget',1)" class="furnace-emerald-chicken-nugget" style="display:none;"> 
-			
+				<input type="button" value="1 Emerald Chicken Meat -> 1 Emerald Chicken Nugget" onclick="furnace('emerald chicken nugget',1)" class="furnace-emerald-chicken-nugget" style="display:none;">
+
 			</div>
-			
+
 		</div>
 		<div id="workbench" class="hidden">
 			<h2>Workbench:</h2>
@@ -247,7 +261,7 @@
 			<input type="button" value="Craft a Gold Chicken Sword (10 Hardened Gold Chicken Meats)" onclick="craft('gold chicken sword')" class="craft-gold-chicken-sword" style="display:none;">
 			<input type="button" value="Craft a Diamond Chicken Sword (10 Hardened Diamond Chicken Meats)" onclick="craft('diamond chicken sword')" class="craft-diamond-chicken-sword" style="display:none;">
 			<input type="button" value="Craft an Emerald Chicken Sword (10 Hardened Emerald Chicken Meats)" onclick="craft('emerald chicken sword')" class="craft-emerald-chicken-sword" style="display:none;">
-			
+
 			<div id="craft-chickenators" style="display:none;">
 				<input type="button" value="Craft a Chickenator 1000" onclick="craft('chickenator 1000')" class="craft-chickenator-onethousand" style="display:none;">
 				<input type="button" value="Craft a Chickenator 2000" onclick="craft('chickenator 2000')" class="craft-chickenator-twothousand" style="display:none;">
@@ -255,43 +269,43 @@
 				<input type="button" value="Craft a Chickenator 8000" onclick="craft('chickenator 8000')" class="craft-chickenator-eightthousand" style="display:none;">
 				<input type="button" value="Craft a Chickenator 9000" onclick="craft('chickenator 9000')" class="craft-chickenator-ninethousand" style="display:none;">
 				<input type="button" value="Craft a Chickenator 9999" onclick="craft('chickenator 9999')" class="craft-chickenator-ninenineninenine" style="display:none;">
-				
+
 				&nbsp;&nbsp;&nbsp;(<a href="javascript:chickenatorprice();">What you need to craft it</a>)
 			</div>
-			
+
 			<input type="button" value="Craft a Chicken helmet (50 Hardened Chicken Meats)" onclick="craft('chicken helmet')" class="craft-chicken-helmet" style="display:none;">
 			<input type="button" value="Craft an Iron Chicken helmet (50 Hardened Iron Chicken Meats)" onclick="craft('iron chicken helmet')" class="craft-iron-chicken-helmet" style="display:none;">
 			<input type="button" value="Craft a Gold Chicken helmet (50 Hardened Gold Chicken Meats)" onclick="craft('gold chicken helmet')" class="craft-gold-chicken-helmet" style="display:none;">
 			<input type="button" value="Craft a Diamond Chicken helmet (50 Hardened Diamond Chicken Meats)" onclick="craft('diamond chicken helmet')" class="craft-diamond-chicken-helmet" style="display:none;">
 			<input type="button" value="Craft an Emerald Chicken helmet (50 Hardened Emerald Chicken Meats)" onclick="craft('emerald chicken helmet')" class="craft-emerald-chicken-helmet" style="display:none;">
-			
+
 			<input type="button" value="Craft a Chicken chestplate (100 Hardened Chicken Meats)" onclick="craft('chicken chestplate')" class="craft-chicken-chestplate" style="display:none;">
 			<input type="button" value="Craft an Iron Chicken chestplate (100 Hardened Iron Chicken Meats)" onclick="craft('iron chicken chestplate')" class="craft-iron-chicken-chestplate" style="display:none;">
 			<input type="button" value="Craft a Gold Chicken chestplate (100 Hardened Gold Chicken Meats)" onclick="craft('gold chicken chestplate')" class="craft-gold-chicken-chestplate" style="display:none;">
 			<input type="button" value="Craft a Diamond Chicken chestplate (100 Hardened Diamond Chicken Meats)" onclick="craft('diamond chicken chestplate')" class="craft-diamond-chicken-chestplate" style="display:none;">
 			<input type="button" value="Craft an Emerald Chicken chestplate (100 Hardened Emerald Chicken Meats)" onclick="craft('emerald chicken chestplate')" class="craft-emerald-chicken-chestplate" style="display:none;">
-			
+
 			<input type="button" value="Craft a Chicken leggings (75 Hardened Chicken Meats)" onclick="craft('chicken leggings')" class="craft-chicken-leggings" style="display:none;">
 			<input type="button" value="Craft an Iron Chicken leggings (75 Hardened Iron Chicken Meats)" onclick="craft('iron chicken leggings')" class="craft-iron-chicken-leggings" style="display:none;">
 			<input type="button" value="Craft a Gold Chicken leggings (75 Hardened Gold Chicken Meats)" onclick="craft('gold chicken leggings')" class="craft-gold-chicken-leggings" style="display:none;">
 			<input type="button" value="Craft a Diamond Chicken leggings (75 Hardened Diamond Chicken Meats)" onclick="craft('diamond chicken leggings')" class="craft-diamond-chicken-leggings" style="display:none;">
 			<input type="button" value="Craft an Emerald Chicken leggings (75 Hardened Emerald Chicken Meats)" onclick="craft('emerald chicken leggings')" class="craft-emerald-chicken-leggings" style="display:none;">
-			
+
 			<input type="button" value="Craft a Chicken boots (25 Hardened Chicken Meats)" onclick="craft('chicken boots')" class="craft-chicken-boots" style="display:none;">
 			<input type="button" value="Craft an Iron Chicken boots (25 Hardened Iron Chicken Meats)" onclick="craft('iron chicken boots')" class="craft-iron-chicken-boots" style="display:none;">
 			<input type="button" value="Craft a Gold Chicken boots (25 Hardened Gold Chicken Meats)" onclick="craft('gold chicken boots')" class="craft-gold-chicken-boots" style="display:none;">
 			<input type="button" value="Craft a Diamond Chicken boots (25 Hardened Diamond Chicken Meats)" onclick="craft('diamond chicken boots')" class="craft-diamond-chicken-boots" style="display:none;">
 			<input type="button" value="Craft an Emerald Chicken boots (25 Hardened Emerald Chicken Meats)" onclick="craft('emerald chicken boots')" class="craft-emerald-chicken-boots" style="display:none;">
-			
+
 			<div id="robots" class="hidden">
 				<input type="button" value="Make a Robot (32 iron chicken nuggets)" onclick="craft('robot')" class="craft-robot">
 				<input type="button" value="Destroy a Robot (You won't get anything back)" onclick="craft('robot-destroy')" class="craft-robot-destroy"><br>
-				Currently you have <span class="robots-owned">0</span> robot(s) | 
+				Currently you have <span class="robots-owned">0</span> robot(s) |
 				<a href="#" onclick="alert('Robots help you to slay chickens automatically in this world and NOT chickenverse, they slay normal chickens, iron chickens and gold chickens only since the other type of chickens will attack you\n\nWARNING: Don\'t buy too many of them! This world has limited number of chickens, they breed, but if you make too many of robots there will be no more chickens and the robots won\'t do anything');">More info about robots</a><br>
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="tab1" class="hidden">
 		<div id="trader">
 			<input type="button" value="Trade a furnace with 5 chicken meats" onclick="trade('furnace')" class="trade-furnace">
@@ -360,9 +374,9 @@ Raw cipher text: <input type="text" value="UaIYeebcaZIeebbIaJcacbZZcdLebZedbccca
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="tab2" class="hidden">
-		Your skills: 
+		Your skills:
 		<div id="skills">
 			<ul>
 				<li>No skill</li>
@@ -380,7 +394,7 @@ Raw cipher text: <input type="text" value="UaIYeebcaZIeebbIaJcacbZZcdLebZedbccca
 			<input type="button" value="Teleporation (10 diamond chicken meats)" onclick="skill('teleportation')" class="skill-teleportation" style="display:none;">
 		</div>
 	</div>
-	
+
 	<div id="tab3" class="hidden">
 		<div id="before-adventure">
 			Bring: <input type="text" id="bring-cn" value="0" size="3"> chicken nuggets<div style="height:3px;"></div><div style="width:13px; opacity:0; display:inline-block;">a</div>and <input type="text" id="bring-icn" value="0" size="3"> iron chicken nuggets
@@ -413,7 +427,7 @@ Raw cipher text: <input type="text" value="UaIYeebcaZIeebbIaJcacbZZcdLebZedbccca
          THE LEGENDARY MUTANT CHICKEN
 
    |<span id="chickenhealth">----------------------------------------</span>|
-		 
+
 
       .".".".
     (`       `)               _.-=-.
@@ -435,7 +449,7 @@ Raw cipher text: <input type="text" value="UaIYeebcaZIeebbIaJcacbZZcdLebZedbccca
                       // /`
                   ___// /__
                 (`(`(---"-`)
-				
+
 
 </pre>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -468,9 +482,9 @@ Well, the nuggets are magically taken<br>from your "real world" inventory.<br>So
 			<pre id="visualizationarea" style="display:none;"></pre>
 		</div><br>
 	</div>
-	
+
 	<div id="tab4" class="hidden">
-		Chickens! v1.2.2<br>
+		Chickens! v1.3<br>
 		Also check out <a href="http://gamehelp16.github.io/thegoldfactory" target="_blank">my first incremental game!</a><br><br>
 		<div id="game-saves">
 			<input type="button" value="Save game" onclick="save('local')">
@@ -487,7 +501,7 @@ Well, the nuggets are magically taken<br>from your "real world" inventory.<br>So
 		- Scroll & Chicken ASCII Art from <a href="http://www.retrojunkie.com/asciiart/asciiart.htm" target="_blank">http://www.retrojunkie.com/asciiart/asciiart.htm</a> (with a little modification)<br><br>
 		<i>If you ask me, this game for me is pretty much like A Dark Room +<br>"A game" (Minecraft based incremental game)</i>
 	</div>
-	
+
 	<div id="tab5" class="hidden">
 		Reddit special is a feature that is given for redditors only<br>
 		However, non redditors that read the source code may also find this feature :p<br><br>
@@ -495,12 +509,16 @@ Well, the nuggets are magically taken<br>from your "real world" inventory.<br>So
 		Well, so this reddit special are some "extra challenges" that will give you some items / benefits in-game<br>
 		All of these challenges will require you to <b>surf through reddit</b> and some also requires you <b>to have a reddit</b><br><b>account</b>, that's why this is named "reddit special"<br><br>
 		In these challenges you must search for a password that is hidden somewhere in reddit and you will be given a clue<br>that leads you to a password. Then you will enter the password in a webpage that will be given to you<br><br>
+		<b>
+			2021 UPDATE:<br>
+			Make sure that you are using the old reddit (old.reddit.com) instead of the new reddit redesign for these challenges!<br>I have tested these challenges again and all of them still work as of December 2021! (as long as you use the old reddit design)
+		</b><br><br>
 		Oh, also before starting these challenges please copy the clue and close this game<br><br>
 		Now, go ahead, the clue for the <span class="rsth"></span> challenge is:
 		<ol class="rsclue"></ol><br>
 		<b>UPDATE:</b> Now you enter the password in 'challenges.html'
 	</div>
-	
+
 	<div id="tab6" class="hidden">
 		This statistics skills tells you that the number of chicken in this world (not the chickenverse) is <b>LIMITED</b>.<br>But don't worry, those chickens will breed automatically, but you can help making the process faster by breeding<br>those chickens (more chickens = more new chickens)<br><br>
 		Here are the statistics (assuming baby chickens aren't included here):<br>
@@ -513,7 +531,32 @@ Well, the nuggets are magically taken<br>from your "real world" inventory.<br>So
 		<input type="button" value="Use medicine to get more chickens faster" class="use-medicine" onclick="breed('medicine')" style="display:none;"><br>
 		<div id="chickens-overbreed">Those chickens won't breed if there are too many of them</div>
 	</div>
-	
+
+	<div id="tab7" class="hidden">
+		<b>Message from the Developer (December 2021)</b><br><br>
+		Hi! If you're reading this I just would like to thank you for playing this game up until now, honestly I didn't expect that this game still has some players even 7+ years after its release!<br><br>
+		I'm going to use this opportunity to say that as of now I have no plans to update this game anymore. However, having said that I recently updated this game with some minor updates!<br><br>
+		If you enjoyed this game you can check out several other games I have made in the past:
+		<ul>
+			<li>
+				<a href='https://gamehelp16.github.io/thegoldfactory/' target='_blank'>The Gold Factory</a>
+			</li>
+			<li>
+				<a href="https://gamehelp16.github.io/world-warper-ld30/" target="_blank">World Warper</a>
+			</li>
+			<li>
+				<a href="https://gamehelp16.github.io/the-unconventional-weapon/" target="_blank">The Unconventional Weapon</a>
+			</li>
+			<li>
+				<a href="https://gamehelp16.github.io/material-warrior/" target="_blank">Material Warrior</a>
+			</li>
+			<li>
+				<a href="https://gamehelp16.github.io/which-subreddit/" target="_blank">Which Subreddit?</a>
+			</li>
+		</ul>
+		You can also check out this <a href="https://gamehelp16.github.io/post/welcome/" target="_blank">blog post I made</a> where I list some other things that I have created just in case you're curious. It just feels amazing knowing that there people who are still playing something I made many years ago, so once again thank <i>you</i>! :)
+	</div>
+
 	<div id="respawnarea" class="hidden">
 		<h2>Furnace:</h2>
 		<input type="button" value="x1000" onclick="cookruby(1000)">
@@ -523,27 +566,27 @@ Well, the nuggets are magically taken<br>from your "real world" inventory.<br>So
 		<input type="button" value="Eat a ruby chicken nugget" onclick="eatruby()"><br><br>
 		Well, you found this easter egg ;)
 	</div>
-	
+
 	<div id="transparentmask"></div>
 	<div id="whitemask">
 		<pre id="endmessage">
-		
-		
-		
-  _   _  ____   ____   ____   ____  _ _ _ _ _ _ _ 
+
+
+
+  _   _  ____   ____   ____   ____  _ _ _ _ _ _ _
  | \ | |/ __ \ / __ \ / __ \ / __ \| | | | | | | |
  |  \| | |  | | |  | | |  | | |  | | | | | | | | |
  | . ` | |  | | |  | | |  | | |  | | | | | | | | |
  | |\  | |__| | |__| | |__| | |__| |_|_|_|_|_|_|_|
  |_| \_|\____/ \____/ \____/ \____/(_|_|_|_|_|_|_)
-                                                  
-												  
+
+
 You successfully killed the chicken, but that stupid
 chicken also killed you at the same time! :(
 
 Of course this is not expected to happen, but, yeah, that's it
 
-Well, no more ruby chickens anymore, and it means that 
+Well, no more ruby chickens anymore, and it means that
 you will never taste the super delicious ruby chicken nugget
 
 (except if you could respawn)
@@ -560,7 +603,9 @@ PPS: The end game state is not saved, so if you reload the page
 you "haven't won" and thus you still can do anything else :D
 		</pre>
 	</div>
-	
-<br><br><br><br>
+	</div>
+	<div id="ads">
+		<iframe data-aa="650128" src="//ad.a-ads.com/650128?size=728x90" style="width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>
+	</div>
 </body>
 </html>
